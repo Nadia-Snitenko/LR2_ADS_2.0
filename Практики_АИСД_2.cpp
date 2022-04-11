@@ -10,7 +10,7 @@ struct stats {
 };
 
 stats selection_sort(vector<int>& data) {
-	stats stat; //_stat 
+	stats stat;
 	size_t min;
 	for (size_t i = 0; i < data.size() - 1; i++) {
 		min = i;
@@ -22,24 +22,6 @@ stats selection_sort(vector<int>& data) {
 	}
 	return stat;
 };
-
-//stats quick_sort_(vector<int>& vec, size_t left, size_t right) {
-//	stats stat; 
-//	int pivot = vec[(left + right) / 2];
-//	size_t i = left, j = right;
-//
-//	while (i <= j) {
-//		while (vec[i] < pivot) ++i;
-//		while (vec[j] > pivot) --j;
-//		if (i <= j) {
-//			swap(vec[i], vec[j]);
-//			++i, --j;
-//		}
-//	}
-//	if (i < right) quick_sort_(vec, i, right);
-//	if (j > left) quick_sort_(vec, left, j);
-//}
-
 
 stats quick_sort_(vector<int>& vec, size_t left, size_t right) {
 	stats stat;
@@ -69,31 +51,27 @@ stats quick_sort_(vector<int>& vec, size_t left, size_t right) {
 	if (right > pivot)
 		quick_sort_(vec, pivot + 1, right);
 	return stat;
-}
+};
 
-stats quick_sort(vector<int>& data) { if (!data.empty()) return quick_sort_(data, 0, data.size() - 1); }
+stats quick_sort(vector<int>& data) { if (!data.empty()) return quick_sort_(data, 0, data.size() - 1); };
 
-stats comb_sort(vector<int>& data) // data — название вектора  (передаём по ссылке, чтобы вызов comb(array) менял вектор array)
+stats comb_sort(vector<int>& data)
 {
 	stats stat;
 	double factor = 1.2473309; // фактор уменьшения
 	int step = data.size() - 1; // шаг сортировки
 
 	//Последняя итерация цикла, когда step==1 эквивалентна одному проходу сортировки пузырьком
-	while (step >= 1)
-	{
-		for (int i = 0; i + step < data.size(); i++)
-		{
-			if (data[i] > data[i + step])
-			{
-				std::swap(data[i], data[i + step]);
+	while (step >= 1) {
+		for (int i = 0; i + step < data.size(); i++) {
+			if (data[i] > data[i + step]) {
+				swap(data[i], data[i + step]);
 			}
 		}
 		step /= factor;
 	}
 	return stat;
-}
-
+};
 
 
 void print(vector<int>& data) {
@@ -141,140 +119,6 @@ int main() {
 }
 
 
-//void selection_sort(int* mas, int size)
-//{
-//	for (int i = 0; i < size-1; i++) {
-//		int min = i;
-//		for (int j = i+1; j < size; j++) {
-//		if (mas[j] < mas[min]) min=j;
-//		}
-//		if (mas[i] > mas[min]) swap(mas[i],mas[min]);
-//	}
-//}
-
-
-//vector<int>& quick_sort_(vector<int>& data, size_t begin, size_t end, vector<int> results) {
-//	if (end - begin < 2) return results;
-//	size_t left = begin + 1;
-//	size_t right = end;
-//	while (left != right) {
-//		while ((left < right) && (data[left] < data[begin])) ++left;
-//		while ((left < right) && (data[right] >= data[begin])) --right;
-//		swap(data[left], data[right]);
-//	}
-//	swap(data[left - 1], data[begin]);
-//	quick_sort_(data, begin, left - 1, results);
-//	quick_sort_(data, left, end, results);
-//	return results;
-//}
-//
-//vector<int>& quick_sort(vector<int>& data) {
-//	vector<int> results ;
-//	quick_sort_(data, 0, data.size() - 1, results);
-//	return results;
-//}
-
-
-	
-
-//struct node {
-//	int data;
-//	node* left;
-//	node* right;
-//};
-//
-//node* add(node* tree, int data) {
-//	if (tree == nullptr) {
-//		tree = new node;
-//		tree->data = data;
-//		tree->left = nullptr;
-//		tree->right = nullptr;
-//	}
-//	else if (tree->data >= data) {
-//		tree->left = add(tree->left, data);
-//	}
-//	else tree->right = add(tree->right, data);
-//	return tree;
-//}
-//void straight(node* tree) {
-//	if (tree) {
-//		cout << tree->data;
-//		straight(tree->left);
-//		straight(tree->right);
-//	}
-//}
-//void simmetric(node* tree) {
-//	if (tree) {
-//		simmetric(tree->left);
-//		cout << tree->data;
-//		simmetric(tree->right);
-//	}
-//}
-//void reverseve(node* tree) {
-//	if (tree) {
-//		reverseve(tree->left);
-//		reverseve(tree->right);
-//		cout << tree->data;
-//	}
-//}
-//node*  search(node* root, int key)
-//{
-//	while (root != nullptr)
-//	{
-//		if (root->data > key)
-//		{
-//			root = root->left;
-//		}
-//		else if (root->data < key)
-//		{
-//			root = root->right;
-//		}
-//		else
-//		{
-//			return root;
-//		}
-//	}
-//	return nullptr;
-//}
-//class list {
-//public: 
-//	node* head;
-//
-//
-//};
-//
-//int main()
-//{
-//	return 0;
-//}
-//
-
-
-
-//int main()
-//{
-//	size_t key;
-//	cout<<"Choose shape:\n"<<"1-square\n"<<"2-rectangle\n";
-//	cin >> key;
-//	int a, b, P, S;
-//	cout << "a = ";
-//	cin >> a;
-//	switch (key) {
-//	case 1:
-//		P = 4 * a;
-//		S = pow(a, 2);
-//		cout << "P = " << P << "\nS = " << S;
-//	case 2:	
-//		cout << "b = ";
-//		cin >> b;
-//		P = (a+b)*2;
-//		S = a*b;
-//		cout << "P = " << P << "\nS = " << S;
-//	case 3:
-//    cout << "value of pi is = " << M_PI ;
-//	
-//	}
-//}
 
 
 
